@@ -6,7 +6,7 @@ describe('Home', () => {
     const { container } = render(<Home />)
 
     const heading = screen.getByRole('heading', {
-      name: /welcome to next\.js!/i,
+      name: /use material ui/i,
     })
 
     expect(heading).toBeInTheDocument()
