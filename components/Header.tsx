@@ -5,86 +5,33 @@ import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
-import MenuItem from '@mui/material/MenuItem'
-import Menu from '@mui/material/Menu'
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import SettingsIcon from '@mui/icons-material/Settings'
 import HelpIcon from '@mui/icons-material/Help'
 import MoreIcon from '@mui/icons-material/MoreVert'
 import PublicIcon from '@mui/icons-material/Public';
 
-import { SearchBar } from '../components'
+import { SearchBar, HeaderMobileMenu } from '../components'
 
 
 export default function PrimarySearchAppBar() {
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null)
 
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState<boolean>(false)
 
   const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null)
+    setIsMobileMenuOpen(false)
   }
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget)
+    setIsMobileMenuOpen(true)
   }
 
   const menuId = 'primary-search-account-menu'
 
   const mobileMenuId = 'primary-search-account-menu-mobile'
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <PublicIcon />
-        </IconButton>
-        <p>Go to Community</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <SettingsIcon />
-        </IconButton>
-        <p>Setting</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <HelpIcon />
-        </IconButton>
-        <p>How to Use</p>
-      </MenuItem>
-      <MenuItem >
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Account</p>
-      </MenuItem>
-    </Menu>
-  )
+
+  const renderMobileMenu = <HeaderMobileMenu mobileMenuId={mobileMenuId} handleMobileMenuClose={handleMobileMenuClose} isMobileMenuOpen={isMobileMenuOpen}/>
 
   return (
     <Box sx={{ flexGrow: 1 }}>
