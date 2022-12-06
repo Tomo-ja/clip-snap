@@ -24,3 +24,7 @@ a {
     background: black;
   }
 }
+
+.application__logo {
+  filter: invert(94%) sepia(100%) saturate(25%) hue-rotate(331deg) brightness(107%) contrast(107%);
+}
