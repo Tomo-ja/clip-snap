@@ -1,14 +1,13 @@
 import React from 'react'
 import { Header, ShortPromotion, UserEntryForm } from '../components'
-import Container from '@mui/material/Container'
-import Box from '@mui/material/Box'
-import { display } from '@mui/system'
+import { Container } from '@mui/material'
 
 import { FormType } from '../helpers/enums'
 
 
 
 const Login = () => {
+
 	return (
 		<div>
 			<Header />

@@ -1,43 +1,28 @@
 import * as React from 'react'
-import Stack from '@mui/material/Stack'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
-import Input from '@mui/material/Input'
-import OutlinedInput from '@mui/material/OutlinedInput'
-import InputLabel from '@mui/material/InputLabel'
-import InputAdornment from '@mui/material/InputAdornment'
-import FormControl from '@mui/material/FormControl'
-import TextField from '@mui/material/TextField'
-import Visibility from '@mui/icons-material/Visibility'
-import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import { useRouter } from 'next/router'
 
+import { Stack, Button, Typography, IconButton, OutlinedInput, InputLabel, FormControl, TextField, InputAdornment} from '@mui/material'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 
 import { FormType } from '../helpers/enums'
-import { useRouter } from 'next/router'
+import { FormInfo } from '../helpers/typesLibrary'
 
 
 type Props = {
 	formType: FormType
 }
 
-interface State {
-  email: string;
-  password: string;
-  showPassword: boolean;
-}
-
 const UserEntryForm = ({ formType }: Props) => {
 	const navigation = useRouter()
-  const [values, setValues] = React.useState<State>({
+  const [values, setValues] = React.useState<FormInfo>({
     email: '',
     password: '',
+    passwordConfirm: '',
     showPassword: false,
   })
 
   const handleChange =
-    (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    (prop: keyof FormInfo) => (event: React.ChangeEvent<HTMLInputElement>) => {
       setValues({ ...values, [prop]: event.target.value })
     }
 
@@ -113,6 +98,33 @@ const UserEntryForm = ({ formType }: Props) => {
 						placeholder='Enter more than 8 letters or numbers'
           />
         </FormControl>
+
+        { formType === FormType.SignIn && 
+          <FormControl sx={{ m: 1, width: '100%' }} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-password">Password Confirm</InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              type={values.showPassword ? 'text' : 'password'}
+              value={values.passwordConfirm}
+              onChange={handleChange('passwordConfirm')}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="password confirm"
+              placeholder='Enter Password Again'
+            />
+          </FormControl>
+        }
+
 
 			{ formType === FormType.LogIn && 
 				<Button variant="text" sx={{fontSize: '10px'}}>Forget your password?</Button>

@@ -1,23 +1,22 @@
 import Link from 'next/link';
-import Stack from '@mui/material/Stack'
-import Button from '@mui/material/Button'
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography'
-import Box from '@mui/system/Box';
 
+import { Stack, Button, Typography} from '@mui/material'
+import { Box } from '@mui/system';
 
 const ShortPromotion = () => {
 
 	return (
-		<Box width='300px' mr={5}>
+		<Box width='300px' sx={{width: {sm: '0', md: '300px'}, mr: {sm: 0, md: 5}}}>
 			<Stack 
+				className='helper'
 				spacing={5} p={2} pt={5} pb={5}
 				sx={{ 
 					display: {xs: 'none', sm: 'none', md: 'block'}, 
 					boxShadow: '50px 49px 0px 1px #171219',
+					width: '300px',
 					borderRadius: 2,
 					border: 1,
-					borderColor: '#D9D9D9'
+					borderColor: '#D9D9D9',
 				}}
 			>
 				<Typography
