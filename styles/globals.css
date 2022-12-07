@@ -7,8 +7,8 @@ body {
 }
 
 a {
+  all: unset;
   color: inherit;
-  text-decoration: none;
 }
 
 * {

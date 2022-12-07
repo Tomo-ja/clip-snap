@@ -8,3 +8,8 @@ export enum CodeType {
 	Python = 'Python',
 	SQL = 'SQL'
 }
+
+export enum FormType {
+	SignIn = 'SIGN IN',
+	LogIn = 'LOG IN'
+}

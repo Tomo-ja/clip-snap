@@ -35,7 +35,7 @@ export default function PrimarySearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{ background: '#F0803C'}} >
+      <AppBar position="fixed" style={{ background: '#F0803C'}} >
         <Toolbar>
           <Image className='application__logo' src='/logo.svg' alt='application logo' width='50' height='30'/>
           <Typography
