@@ -13,3 +13,9 @@ export enum FormType {
 	SignIn = 'SIGN IN',
 	LogIn = 'LOG IN'
 }
+
+export enum DrawerListTitles {
+	Folder = 'FOLDER',
+	SnapType = 'SNAP TYPE',
+	Tags = 'Tags'
+}
