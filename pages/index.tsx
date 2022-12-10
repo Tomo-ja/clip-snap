@@ -27,7 +27,7 @@ const Home = ({ window }: Props) => {
   const container = window !== undefined ? () => window().document.body : undefined
 
   return (
-    <div>
+    <>
       <Head>
         <title>Snap Clip - Home</title>
       </Head>
@@ -90,13 +90,13 @@ const Home = ({ window }: Props) => {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: 'none' } }}
           >
-            <MenuIcon />
+            <MenuIcon sx={{marginLeft: 3}}/>
           </IconButton>
           <DashboardHeader />
           <DashboardContent />
         </Box>
       </Box>
-    </div>
+    </>
   )
 }
 

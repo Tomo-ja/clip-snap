@@ -4,7 +4,7 @@ import AccordionDetails from '@mui/material/AccordionDetails'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import Typography from '@mui/material/Typography'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { Box } from '@mui/material'
+import { Box, Chip, Stack, TextField, Card } from '@mui/material'
 
 
 const DashboardContent = () => {
@@ -23,16 +23,28 @@ const DashboardContent = () => {
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
-          <Typography sx={{ width: '33%', flexShrink: 0 }}>
-            General settings
+          <Typography sx={{ width: '33%', flexShrink: 0, fontWeight: 'bold' }}>
+            Snap Title
           </Typography>
           <Typography sx={{ color: 'text.secondary' }}>I am an accordion</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-            Aliquam eget maximus est, id dignissim quam.
-          </Typography>
+          <Stack direction='column' spacing={2}>
+            <Stack direction='row' spacing={1}>
+              <Chip label='tag1' size='small' color='primary' />
+              <Chip label='tag2' size='small' color='primary' />
+            </Stack>
+            <Stack direction='row' spacing={2} >
+              <TextField id="standard-basic" label="Variable" variant="standard" />
+              <TextField id="standard-basic" label="Name" variant="standard" />
+            </Stack>
+            <Card  sx={{ backgroundColor: '#171219', color: 'white', p: 1 }}>
+              <code >
+                templete<br />
+                will be here
+              </code>
+            </Card>
+          </Stack>
         </AccordionDetails>
       </Accordion>
       <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>

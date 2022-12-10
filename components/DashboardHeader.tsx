@@ -36,7 +36,7 @@ const DashboardHeader = () => {
             </IconButton>
         </StackHorizontally>
 			</StackHorizontally>
-			<Typography component={'p'} sx={{color: '#00000099'}}>
+			<Typography component={'p'} sx={{ color: 'text.secondary' }}>
 				Short description of the folder will be here
 			</Typography>
 		</Box>
