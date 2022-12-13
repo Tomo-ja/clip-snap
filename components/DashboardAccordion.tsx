@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Accordion, AccordionDetails, AccordionSummary, Typography, Chip, Stack, TextField, Card, Button, Snackbar } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Typography, Chip, Stack, TextField, Card, Button, Snackbar, Link } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import BorderColorIcon from '@mui/icons-material/BorderColor'
@@ -60,6 +60,11 @@ const DashboardAccordion = ({ expanded, handleChange, key }: Props) => {
 						<Button variant='contained' color='warning' onClick={handleClick} startIcon={<ContentCopyIcon />}>Copy</Button>
 						<Button variant='outlined' color='warning' startIcon={<BorderColorIcon />}>Edit</Button>
 					</Stack>
+				</Stack>
+				<Typography sx={{ color: 'text.secondary', mt:2 }}>References: </Typography>
+				<Stack pl={2}>
+					<Link sx={{fontSize: '12px', cursor: 'pointer'}} href='https://github.com/Tomo-ja' target='_blank' rel="noreferrer">https://github.com/Tomo-ja</Link>
+					<Link sx={{fontSize: '12px', cursor: 'pointer'}} href='https://github.com/Tomo-ja' target='_blank' rel="noreferrer">https://github.com/Tomo-ja</Link>
 				</Stack>
 				<Snackbar 
 					anchorOrigin={{ vertical:'bottom', horizontal: 'center' }}

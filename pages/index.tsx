@@ -4,10 +4,9 @@ import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
 import CssBaseline from '@mui/material/CssBaseline'
 import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
 import MenuIcon from '@mui/icons-material/Menu'
 
-import { Header, DrawerContent, DashboardHeader, DashboardContent } from '../components'
+import { Header, DrawerContent, DashboardHeader, DashboardContent, Modal } from '../components'
 import { IconButton } from '@mui/material'
 
 const drawerWidth = 240
@@ -77,9 +76,10 @@ const Home = ({ window }: Props) => {
         </Drawer>
         <Box
           component="main"
+          className='test-main'
           sx={{
             flexGrow: 1,
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
+            width: '100%',
           }}
         >
           <Toolbar />
@@ -95,6 +95,7 @@ const Home = ({ window }: Props) => {
           <DashboardHeader />
           <DashboardContent />
         </Box>
+        <Modal />
       </Box>
     </>
   )

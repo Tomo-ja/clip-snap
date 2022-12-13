@@ -10,7 +10,6 @@ import PublicIcon from '@mui/icons-material/Public';
 
 import { SearchBar, HeaderMobileMenu } from '../components'
 
-
 export default function PrimarySearchAppBar() {
     React.useState<null | HTMLElement>(null)
 
