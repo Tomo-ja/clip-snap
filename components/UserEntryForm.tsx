@@ -4,6 +4,8 @@ import { useRouter } from 'next/router'
 import { Stack, Button, Typography, IconButton, OutlinedInput, InputLabel, FormControl, TextField, InputAdornment} from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 
+import useUserEntry from '../customHooks/useUserEntry'
+
 import { FormType } from '../helpers/enums'
 import { FormInfo } from '../helpers/typesLibrary'
 
@@ -13,6 +15,7 @@ type Props = {
 }
 
 const UserEntryForm = ({ formType }: Props) => {
+  
 	const navigation = useRouter()
   const [values, setValues] = React.useState<FormInfo>({
     email: '',
@@ -20,6 +23,7 @@ const UserEntryForm = ({ formType }: Props) => {
     passwordConfirm: '',
     showPassword: false,
   })
+  const { tryToLogin, tryToSignUp } = useUserEntry()
 
   const handleChange =
     (prop: keyof FormInfo) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,11 +43,19 @@ const UserEntryForm = ({ formType }: Props) => {
 
 	const switchAccountEntryPages = () => {
 		if ( formType === FormType.LogIn ) {
-			navigation.push('/signin')
-		} else if ( formType === FormType.SignIn ) {
+			navigation.push('/signup')
+		} else if ( formType === FormType.SignUp ) {
 			navigation.push('/login')
 		}
 	}
+
+  const handleSubmission = () => {
+    if ( formType === FormType.LogIn ) {
+      tryToLogin('tomonao.hj@gmail.com', 'admin1234')
+    } else if ( formType === FormType.SignUp ) {
+      tryToSignUp('tomo', 'tomo.hj@gmail.com', 'admin1234')
+    }
+  }
 
 	return (
 		<Stack
@@ -99,7 +111,7 @@ const UserEntryForm = ({ formType }: Props) => {
           />
         </FormControl>
 
-        { formType === FormType.SignIn && 
+        { formType === FormType.SignUp && 
           <FormControl sx={{ m: 1, width: '100%' }} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-password">Password Confirm</InputLabel>
             <OutlinedInput
@@ -129,7 +141,7 @@ const UserEntryForm = ({ formType }: Props) => {
 			{ formType === FormType.LogIn && 
 				<Button variant="text" sx={{fontSize: '10px'}}>Forget your password?</Button>
 			}
-			<Button variant="contained" color='warning' fullWidth>{ formType }</Button>
+			<Button onClick={() => handleSubmission()} variant="contained" color='warning' fullWidth>{ formType }</Button>
 
 			{ formType === FormType.LogIn ?
 				<Button onClick={()=> switchAccountEntryPages()} variant="text" sx={{fontSize: '10px'}}>Do you have an account already?</Button>
