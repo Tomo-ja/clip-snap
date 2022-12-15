@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { useRouter } from 'next/router'
 
-import { Stack, Button, Typography, IconButton, OutlinedInput, InputLabel, FormControl, TextField, InputAdornment} from '@mui/material'
+import { Stack, Button, Typography, IconButton, OutlinedInput, InputLabel, FormControl, TextField, InputAdornment, Snackbar, Alert} from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
+import CloseIcon from '@mui/icons-material/Close';
 
 import useUserEntry from '../customHooks/useUserEntry'
 
@@ -14,16 +14,34 @@ type Props = {
 	formType: FormType
 }
 
+
+
 const UserEntryForm = ({ formType }: Props) => {
   
-	const navigation = useRouter()
   const [values, setValues] = React.useState<FormInfo>({
     email: '',
     password: '',
     passwordConfirm: '',
     showPassword: false,
   })
-  const { tryToLogin, tryToSignUp } = useUserEntry()
+  const { tryToLogin, tryToSignUp, bothPasswordsMatched, isPasswordValidated, isRequiredInfoFilled, message, setMessage, router } = useUserEntry()
+
+  const handleCloseSnackBar = (event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') return
+    setMessage(null)
+  }
+  const action = (
+    <React.Fragment>
+      <IconButton 
+        size='small'
+        aria-label='close'
+        color='inherit'
+        onClick={handleCloseSnackBar}
+      >
+        <CloseIcon fontSize='small' />
+      </IconButton>
+    </React.Fragment>
+  )
 
   const handleChange =
     (prop: keyof FormInfo) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,18 +60,23 @@ const UserEntryForm = ({ formType }: Props) => {
   }
 
 	const switchAccountEntryPages = () => {
+
 		if ( formType === FormType.LogIn ) {
-			navigation.push('/signup')
+			router.push('/signup')
 		} else if ( formType === FormType.SignUp ) {
-			navigation.push('/login')
+			router.push('/login')
 		}
 	}
 
   const handleSubmission = () => {
+    if (!isRequiredInfoFilled(values, formType)) return
+    if (!isPasswordValidated(values.password)) return
+    if (formType === FormType.SignUp && !bothPasswordsMatched(values.password, values.passwordConfirm)) return
+
     if ( formType === FormType.LogIn ) {
-      tryToLogin('tomonao.hj@gmail.com', 'admin1234')
+      tryToLogin(values.email, values.password)
     } else if ( formType === FormType.SignUp ) {
-      tryToSignUp('tomo', 'tomo.hj@gmail.com', 'admin1234')
+      tryToSignUp(values.email.split('@')[0], values.email, values.password)
     }
   }
 
@@ -146,8 +169,19 @@ const UserEntryForm = ({ formType }: Props) => {
 			{ formType === FormType.LogIn ?
 				<Button onClick={()=> switchAccountEntryPages()} variant="text" sx={{fontSize: '10px'}}>Do you have an account already?</Button>
 				:
-				<Button onClick={()=> switchAccountEntryPages()} variant="text" sx={{fontSize: '10px'}}>You don&apost have an account?</Button>
+				<Button onClick={()=> switchAccountEntryPages()} variant="text" sx={{fontSize: '10px'}}>You don&apos;t have an account?</Button>
 			}
+      <Snackbar
+        open={message ? true : false}
+        anchorOrigin={{ vertical:'bottom', horizontal: 'center' }}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackBar}
+        action={action}
+      >
+        <Alert onClose={handleCloseSnackBar} severity='error' sx={{width: '100%'}}>
+          {message}
+        </Alert>
+      </Snackbar>
 		</Stack>
 	)
 }
