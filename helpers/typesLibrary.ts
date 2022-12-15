@@ -1,9 +1,7 @@
 import { CodeType } from './enums'
 
 export type User = {
-  id: string,
   name: string,
-  token: string,
   folderIds: string[],
   tags: SnapTag[]
 }

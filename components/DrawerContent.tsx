@@ -19,12 +19,6 @@ const DrawerContent = () => {
 					listItems={['Inbox', 'Starred', 'Send email', 'Drafts']}
 				/>
 				<Divider sx={{ bgcolor: "#fff" }} />
-				<DrawerListTitle title={DrawerListTitles.SnapType} />
-				<DrawerList
-					listListTitles={DrawerListTitles.SnapType}
-					listItems={['Inbox', 'Starred', 'Send email', 'Drafts']}
-				/>
-				<Divider sx={{ bgcolor: "#fff" }} />
 				<DrawerListTitle title={DrawerListTitles.Tags} />
 				<DrawerList
 					listListTitles={DrawerListTitles.Tags}

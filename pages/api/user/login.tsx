@@ -23,9 +23,6 @@ export default async function login(req: NextApiRequest, res: NextApiResponse<an
 		return res.json ({
 			success: true,
 			id: user._id.toString(),
-			name: user.name,
-			tags: user.tags || [],
-			folders: user.folders || []
 		})
 
 	} catch (error) {

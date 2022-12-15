@@ -1,28 +1,35 @@
+import { GetServerSideProps } from 'next'
+import { useRouter } from "next/router";
 import Head from 'next/head'
-import * as React from 'react'
-import Box from '@mui/material/Box'
-import Drawer from '@mui/material/Drawer'
-import CssBaseline from '@mui/material/CssBaseline'
-import Toolbar from '@mui/material/Toolbar'
+import React, {useState} from 'react'
+import { getCookies, getCookie, setCookie, deleteCookie } from 'cookies-next';
+
+import { IconButton, Box, CssBaseline, Toolbar } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 
-import { Header, DrawerContent, DashboardHeader, DashboardContent, Modal, NavigationMenu } from '../components'
-import { IconButton } from '@mui/material'
-import { GetServerSideProps } from 'next'
-
-const drawerWidth = 240
+import { Header, DashboardHeader, DashboardContent, Modal, NavigationMenu } from '../components'
+import { appAxios } from '../lib/axios';
+import { User } from '../helpers/typesLibrary'
 
 type Props = {
-  window?: () => Window
+  window?: () => Window,
+  user?: User
 }
 
-const Home = ({ window }: Props) => {
+const Home = ({ window, user }: Props) => {
   
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const router = useRouter()
+
+  if(!user) {
+    router.replace('/login')
+  }
 
   const handleDrawerToggle = () => {
     setMobileMenuOpen(!mobileMenuOpen)
   }
+
+
 
   return (
     <>
@@ -66,11 +73,18 @@ const Home = ({ window }: Props) => {
 
 export default Home
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const userId = getCookie('user-id', { req })
+  if (!userId) return { props: {}}
+  
+  const response = await appAxios.post('/api/user/show', {id: userId})
+  const user: User = response.data
+
+  // fetch folder names
 
   return {
     props: {
-
+      user
     }
   }
 }

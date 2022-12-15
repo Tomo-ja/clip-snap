@@ -40,17 +40,18 @@ const DashboardAccordion = ({ expanded, handleChange, key }: Props) => {
 				</Typography>
 				<Typography sx={{ color: 'text.secondary' }}>I am an accordion</Typography>
 			</AccordionSummary>
-			<AccordionDetails>
-				<Stack direction='column' spacing={4}>
+			<AccordionDetails sx={{pt: 0}}>
+				<Stack direction='column' spacing={3}>
 					<Stack direction='row' spacing={1}>
-						<Chip label='tag1' size='small' color='primary' />
-						<Chip label='tag2' size='small' color='primary' />
+						<Chip label='type' size='small' variant='filled' color='info' sx={{borderRadius: '5px'}}/>
+						<Chip label='tag1' size='small' variant='outlined' color='info' sx={{borderRadius: '5px'}}/>
+						<Chip label='tag2' size='small' variant='outlined' color='info' sx={{borderRadius: '5px'}}/>
 					</Stack>
 					<Stack direction='row' spacing={2} >
-						<TextField id="standard-basic" label="Variable" variant="standard" />
-						<TextField id="standard-basic" label="Name" variant="standard" />
+						<TextField id="standard-basic" size='small' label="Variable" variant="outlined" />
+						<TextField id="standard-basic" size='small' label="Name" variant="outlined" />
 					</Stack>
-					<Card  sx={{ backgroundColor: '#171219', color: 'white', p: 1 }}>
+					<Card  sx={{ backgroundColor: '#171219', color: 'white', p: 1, width: '100%' }}>
 						<code >
 							template<br />
 							will be here
@@ -61,8 +62,8 @@ const DashboardAccordion = ({ expanded, handleChange, key }: Props) => {
 						<Button variant='outlined' color='warning' startIcon={<BorderColorIcon />}>Edit</Button>
 					</Stack>
 				</Stack>
-				<Typography sx={{ color: 'text.secondary', mt:2 }}>References: </Typography>
-				<Stack pl={2}>
+				<Typography textAlign={'right'} sx={{ color: 'text.secondary', mt:2 }}>References: </Typography>
+				<Stack pl={2} textAlign='right'>
 					<Link sx={{fontSize: '12px', cursor: 'pointer'}} href='https://github.com/Tomo-ja' target='_blank' rel="noreferrer">https://github.com/Tomo-ja</Link>
 					<Link sx={{fontSize: '12px', cursor: 'pointer'}} href='https://github.com/Tomo-ja' target='_blank' rel="noreferrer">https://github.com/Tomo-ja</Link>
 				</Stack>

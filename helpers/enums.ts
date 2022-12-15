@@ -6,7 +6,7 @@ export enum CodeType {
 	TypeScript = 'TypeScript',
 	Swift = 'Swift',
 	Python = 'Python',
-	SQL = 'SQL'
+	Other = 'Other'
 }
 
 export enum FormType {
