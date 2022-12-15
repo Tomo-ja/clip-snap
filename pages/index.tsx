@@ -6,8 +6,9 @@ import CssBaseline from '@mui/material/CssBaseline'
 import Toolbar from '@mui/material/Toolbar'
 import MenuIcon from '@mui/icons-material/Menu'
 
-import { Header, DrawerContent, DashboardHeader, DashboardContent, Modal } from '../components'
+import { Header, DrawerContent, DashboardHeader, DashboardContent, Modal, NavigationMenu } from '../components'
 import { IconButton } from '@mui/material'
+import { GetServerSideProps } from 'next'
 
 const drawerWidth = 240
 
@@ -17,13 +18,11 @@ type Props = {
 
 const Home = ({ window }: Props) => {
   
-  const [mobileOpen, setMobileOpen] = React.useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen)
+    setMobileMenuOpen(!mobileMenuOpen)
   }
-
-  const container = window !== undefined ? () => window().document.body : undefined
 
   return (
     <>
@@ -33,47 +32,11 @@ const Home = ({ window }: Props) => {
       <Box sx={{ display: 'flex'}}>
         <CssBaseline />
         <Header />
-        <Box
-          component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-          aria-label="mailbox folders"
-        ></Box>
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', 
-            width: drawerWidth },
-          }}
-          PaperProps ={{
-            sx: { backgroundColor: '#171219', color: '#fff'}
-          }}
-        >
-          <DrawerContent />
-        </Drawer>
-        <Drawer
-          className='helper'
-          variant="permanent"
-          sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth
-            }
-          }}
-          PaperProps ={{
-            sx: { backgroundColor: '#171219', color: '#fff'}
-          }}
-          open
-        >
-          <DrawerContent />
-        </Drawer>
+        <NavigationMenu 
+          window={window}
+          mobileMenuOpen={mobileMenuOpen}
+          handleDrawerToggle={handleDrawerToggle}
+        />
         <Box
           component="main"
           className='test-main'
@@ -102,3 +65,12 @@ const Home = ({ window }: Props) => {
 }
 
 export default Home
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+
+  return {
+    props: {
+
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { setCookie } from 'cookies-next';
 
 import { FormType } from "../helpers/enums";
 import { FormInfo } from "../helpers/typesLibrary";
@@ -49,7 +50,7 @@ const useUserEntry = () => {
 		if (!response.data.success) {
 			setMessage(response.data.message)
 		} else if (response.data.success) {
-			// TODO: need to set id to cookie for the future
+			setCookie('user-id', response.data.id)
 			router.push('/')
 		}
 
