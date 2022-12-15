@@ -52,7 +52,7 @@ const DashboardAccordion = ({ expanded, handleChange, key }: Props) => {
 					</Stack>
 					<Card  sx={{ backgroundColor: '#171219', color: 'white', p: 1 }}>
 						<code >
-							templete<br />
+							template<br />
 							will be here
 						</code>
 					</Card>

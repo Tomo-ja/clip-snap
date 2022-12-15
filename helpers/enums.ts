@@ -10,7 +10,7 @@ export enum CodeType {
 }
 
 export enum FormType {
-	SignIn = 'SIGN IN',
+	SignUp = 'SIGN UP',
 	LogIn = 'LOG IN'
 }
 
