@@ -1,10 +1,7 @@
 import * as React from 'react'
 import Image from 'next/image'
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
+
+import { AppBar, Box, Toolbar, IconButton, Typography } from '@mui/material'
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import SettingsIcon from '@mui/icons-material/Settings'
 import HelpIcon from '@mui/icons-material/Help'
@@ -12,7 +9,6 @@ import MoreIcon from '@mui/icons-material/MoreVert'
 import PublicIcon from '@mui/icons-material/Public';
 
 import { SearchBar, HeaderMobileMenu } from '../components'
-
 
 export default function PrimarySearchAppBar() {
     React.useState<null | HTMLElement>(null)
@@ -35,7 +31,11 @@ export default function PrimarySearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" style={{ background: '#F0803C'}} >
+      <AppBar 
+        position="fixed" 
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }} 
+        style={{ background: '#F0803C'}} 
+        >
         <Toolbar>
           <Image className='application__logo' src='/logo.svg' alt='application logo' width='50' height='30'/>
           <Typography
