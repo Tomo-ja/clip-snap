@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import connectToMongo from "../../../lib/connectToMongo";
 import User from "../../../models/user";
 
-export default async function addFolderId(req: NextApiRequest, res: NextApiResponse<any>){
+export default async function addTag(req: NextApiRequest, res: NextApiResponse<any>){
 	try{
 		await connectToMongo()
 		const user = await User.findById(req.body.data.userId)
@@ -11,11 +11,10 @@ export default async function addFolderId(req: NextApiRequest, res: NextApiRespo
 			return res.json({success: false, message: 'User not found'})
 		}
 
-		user.folders.push(req.body.data.folderId)
+		user.tags.push(req.body.data.name)
 
-		console.log('new folder', user.folders)
 		await user.save()
-		res.json({success: true, message: 'Add folder id'})
+		res.json({success: true, message: 'Add tag to user'})
 
 	} catch (error) {
 		res.json({ error })

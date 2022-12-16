@@ -65,6 +65,9 @@ export const modalFormSubmitUrlGenerator = (modalType: ModalType) => {
 		case ModalType.UpdateProfile: 
 			url = '/api/user/update'
 			break
+		case ModalType.CreateTag:
+			url = 'api/user/addTag'
+			break
 		default:
 			url = ''
 	}

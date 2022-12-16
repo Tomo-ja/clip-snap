@@ -42,11 +42,11 @@ const useModalForm = ({name, description, modalType}: Props) => {
 		}
 
 		// TODO: replace context data?
-		const folderId = '639c19599ba891e1dbb31223'
+		const folderId = '639c1d17912354d5e228b1e2'
 
 		const data = { name: formValues.name, description: formValues.description, userId, folderId }
 		const response = await appAxios.post(apiUrl, {data})
-		if (!response.data.success) {
+		if (!response.data.success || response.status === 400) {
 			console.error('failed to call api')
 			return false
 		}
