@@ -38,6 +38,9 @@ const ModalForm = ({ name, description, modalType, handleModalClose }: Props) =>
 
 	if (modalType === ModalType.Setting) {
 		return <ModalForSetting handleModalClose={handleModalClose} />
+	}else if (modalType === ModalType.CreateSnap || modalType === ModalType.UpdateSnap) {
+		console.error('should not run because modal type is not suitable')
+		return <></>
 	} else if(!formNeeded) {
 		return (
 			<StyledModalWrapper sx={{width: '400px'}}>

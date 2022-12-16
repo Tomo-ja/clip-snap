@@ -7,14 +7,16 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import { StackHorizontally } from '../styledComponents'
-import { Modal } from '../components'
+import { Modal, ModalFormForSnap } from '../components'
 import useModal from '../customHooks/useModal';
+import useSnapEditor from '../customHooks/useSnapEditor';
 import { ModalType } from '../helpers/enums';
 
 
 const DashboardHeader = () => {
 
   const { modalState, handleModalClose, handleModalOpen } = useModal()
+	const { snapValues, handleValueChange, handleEditorState, editorState } = useSnapEditor({modalType: ModalType.CreateSnap})
 
 	return(
 		<Box sx={ {flexGrow: 1}} bgcolor={'white'} p={3}>
@@ -30,7 +32,7 @@ const DashboardHeader = () => {
             <IconButton onClick={() => handleModalOpen(ModalType.DeleteFolder)} size="medium" color="inherit">
               <DeleteIcon />
             </IconButton>
-            <IconButton onClick={() =>handleModalOpen(ModalType.CreateSnap)} size="large" edge="end" color="inherit" >
+            <IconButton onClick={() =>handleEditorState(ModalType.CreateSnap)} size="large" edge="end" color="inherit" >
               <AddCircleIcon fontSize="large" sx={{ color: '#6599F8'}}/>
             </IconButton>
         </StackHorizontally>
@@ -39,6 +41,7 @@ const DashboardHeader = () => {
 				Short description of the folder will be here
 			</Typography>
       <Modal modalState={modalState} handleModalClose={handleModalClose} />
+			<ModalFormForSnap snapValues={snapValues} handleValueChange={handleValueChange} handleEditorState={handleEditorState} editorState={editorState} />
 		</Box>
 	)
 

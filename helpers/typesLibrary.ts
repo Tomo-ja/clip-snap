@@ -7,20 +7,22 @@ export type User = {
 }
 
 export type Folder = {
-  id: string,
+  id?: string,
   name: string,
   description: string,
   snaps: Snap[]
 }
 
+// TODO: content could be multiple with variables
 export type Snap = {
-  id: string,
-  creator: string,
+  id?: string,
   title: string,
   tags: SnapTag[],
   description: string,
   referencesUrl: string[],
-  templates: SnapTemplate[]
+  type?: CodeType,
+  code: string
+  // templates: SnapTemplate[]
 }
 
 export type SnapTag = {

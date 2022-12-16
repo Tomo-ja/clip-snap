@@ -40,7 +40,6 @@ const ModalForSetting = ({ handleModalClose }: Props) => {
 			</Typography>
 			<Button onClick={handleDeleteAccount} variant="contained" color='error' fullWidth>Delete</Button>
 			<Button onClick={handleModalClose} variant="outlined" color='inherit' fullWidth sx={{mt: 5}}>Cancel</Button>
-
 		</StyledModalWrapper>
 	)
 }

@@ -18,6 +18,7 @@ const BasicModal = ({ modalState, handleModalClose }: Props) => {
       <Modal
         open={modalState ? true : false}
         onClose={handleModalClose}
+        sx={{overflow: 'scroll'}}
       >
         <ModalForm modalType={modalState} handleModalClose={handleModalClose} />
       </Modal>

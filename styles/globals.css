@@ -28,3 +28,16 @@ a {
 .application__logo {
   filter: invert(94%) sepia(100%) saturate(25%) hue-rotate(331deg) brightness(107%) contrast(107%);
 }
+textarea{
+  width: 100%;
+  appearance: none;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  padding: 1rem;
+  color: white;
+  background-color: black;
+  font-size: 15px;
+  font-family: monospace;
+  resize: vertical;
+}

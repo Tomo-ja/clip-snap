@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles'
 
 const StyledModalWrapper = styled('div')(({ theme }) => ({
-	position: 'absolute',
+	position: 'fixed',
 	top: '50%',
 	left: '50%',
 	transform: 'translate(-50%, -50%)',
