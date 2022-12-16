@@ -2,6 +2,7 @@ import { Stack, TextField, Typography, Button } from '@mui/material'
 
 import { StyledModalWrapper } from '../styledComponents'
 
+import { ModalForSetting } from '../components'
 import useModalForm from "../customHooks/useModalForm"
 import { ModalType } from '../helpers/enums'
 import { modalFormDescriptionNeeded, modalSupportInfoProvider } from '../helpers/function'
@@ -35,8 +36,9 @@ const ModalForm = ({ name, description, modalType, handleModalClose }: Props) =>
 		handleModalClose()
 	}
 
-
-	if(!formNeeded) {
+	if (modalType === ModalType.Setting) {
+		return <ModalForSetting handleModalClose={handleModalClose} />
+	} else if(!formNeeded) {
 		return (
 			<StyledModalWrapper sx={{width: '400px'}}>
 				<Typography variant="h5" component="h2" textAlign='center' fontWeight={700} >
