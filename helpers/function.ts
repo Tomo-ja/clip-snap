@@ -3,8 +3,8 @@ import { ModalType } from './enums'
 
 export const modalSupportInfoProvider = (modalType: ModalType | null) => {
 	let text = ''
-	let color = 'warning'
 	let formNeeded = true
+
 	switch(modalType) {
 		case ModalType.CreateFolder:
 		case ModalType.CreateSnap:
@@ -14,7 +14,6 @@ export const modalSupportInfoProvider = (modalType: ModalType | null) => {
 		case ModalType.DeleteFolder:
 		case ModalType.DeleteSnap:
 			text = 'Delete'
-			color = 'error' 
 			formNeeded = false
 			break
 		case ModalType.UpdateFolder:
@@ -26,7 +25,8 @@ export const modalSupportInfoProvider = (modalType: ModalType | null) => {
 			text = 'New Modal type'
 			formNeeded = false
 	}
-	return { buttonText: text, buttonColor: color, formNeeded } as const
+
+	return { buttonText: text, formNeeded }
 }
 
 export const modalFormDescriptionNeeded = (modalType: ModalType | null) => {
@@ -46,4 +46,28 @@ export const modalFormDescriptionNeeded = (modalType: ModalType | null) => {
 	}
 
 	return descriptionNeeded
+}
+
+export const modalFormSubmitUrlGenerator = (modalType: ModalType) => {
+	let url: string
+
+
+	switch(modalType) {
+		case ModalType.CreateFolder:
+			url = '/api/folder/create'
+			break
+		case ModalType.UpdateFolder: 
+			url = '/api/folder/update'
+			break
+		case ModalType.DeleteFolder:
+			url = '/api/folder/deleteFolder'
+			break
+		case ModalType.UpdateProfile: 
+			url = '/api/user/update'
+			break
+		default:
+			url = ''
+	}
+
+	return url
 }

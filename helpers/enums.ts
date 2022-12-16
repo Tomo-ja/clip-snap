@@ -23,7 +23,7 @@ export enum DrawerListTitles {
 export enum ModalType {
 	CreateFolder = 'Create New Folder',
 	UpdateFolder = 'Update Folder',
-	DeleteFolder = 'DeleteFolder',
+	DeleteFolder = 'Delete Folder',
 	CreateTag = 'Create New Tag',
 	UpdateProfile = 'Update Profile',
 	Setting = 'Setting',
