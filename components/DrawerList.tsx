@@ -31,11 +31,11 @@ const DrawerList = ({ listListTitles, listItems }: Props) => {
 	}
 
 	return (
-		<List sx={{paddingBlock: 0}}>
+		<List sx={{paddingBlock: 0, paddingLeft: 1}}>
 		{listItems.map(text => (
 			<ListItem key={text} disablePadding sx={{":hover": {backgroundColor: '#F0803C99'}}}>
 				<ListItemButton >
-					<ListItemIcon style={{ color: 'white'}}>
+					<ListItemIcon style={{ color: 'white', minWidth: '42px'}}>
 						{icon}
 					</ListItemIcon>
 					<ListItemText primary={text} />

@@ -42,3 +42,8 @@ export type FormInfo = {
   passwordConfirm: string;
   showPassword: boolean;
 }
+
+export type ModalFormInfo = {
+  name: string,
+  description: string
+}

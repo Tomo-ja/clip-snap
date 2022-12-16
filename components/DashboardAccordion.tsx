@@ -3,6 +3,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Typography, Chip, Stack,
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import BorderColorIcon from '@mui/icons-material/BorderColor'
+import DeleteIcon from '@mui/icons-material/Delete';
 
 import { Alert } from '../components'
 
@@ -60,6 +61,7 @@ const DashboardAccordion = ({ expanded, handleChange, key }: Props) => {
 					<Stack spacing={2} direction='row'>
 						<Button variant='contained' color='warning' onClick={handleClick} startIcon={<ContentCopyIcon />}>Copy</Button>
 						<Button variant='outlined' color='warning' startIcon={<BorderColorIcon />}>Edit</Button>
+						<Button variant='outlined' color='error' startIcon={<DeleteIcon />}>Delete</Button>
 					</Stack>
 				</Stack>
 				<Typography textAlign={'right'} sx={{ color: 'text.secondary', mt:2 }}>References: </Typography>

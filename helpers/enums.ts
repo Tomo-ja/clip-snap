@@ -19,3 +19,15 @@ export enum DrawerListTitles {
 	SnapType = 'SNAP TYPE',
 	Tags = 'Tags'
 }
+
+export enum ModalType {
+	CreateFolder = 'Create New Folder',
+	UpdateFolder = 'Update Folder',
+	DeleteFolder = 'DeleteFolder',
+	CreateTag = 'Create New Tag',
+	UpdateProfile = 'Update Profile',
+	Setting = 'Setting',
+	CreateSnap = 'Create New Snap',
+	UpdateSnap = 'Update Snap',
+	DeleteSnap = 'Delete Snap'
+}

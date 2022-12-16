@@ -65,7 +65,6 @@ const Home = ({ window, user }: Props) => {
           <DashboardHeader />
           <DashboardContent />
         </Box>
-        <Modal />
       </Box>
     </>
   )

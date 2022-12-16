@@ -8,12 +8,14 @@ import HelpIcon from '@mui/icons-material/Help'
 import MoreIcon from '@mui/icons-material/MoreVert'
 import PublicIcon from '@mui/icons-material/Public';
 
-import { SearchBar, HeaderMobileMenu } from '../components'
+import { SearchBar, HeaderMobileMenu, Modal } from '../components'
+import useModal from '../customHooks/useModal'
+import { ModalType } from '../helpers/enums'
 
-export default function PrimarySearchAppBar() {
-    React.useState<null | HTMLElement>(null)
+const PrimarySearchAppBar = () => {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState<boolean>(false)
+  const { modalState, handleModalOpen, handleModalClose } = useModal()
 
   const handleMobileMenuClose = () => {
     setIsMobileMenuOpen(false)
@@ -22,8 +24,6 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setIsMobileMenuOpen(true)
   }
-
-  const menuId = 'primary-search-account-menu'
 
   const mobileMenuId = 'primary-search-account-menu-mobile'
 
@@ -49,34 +49,22 @@ export default function PrimarySearchAppBar() {
           <SearchBar />
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            <IconButton size="large" color="inherit">
               <PublicIcon />
             </IconButton>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            <IconButton onClick={() => handleModalOpen(ModalType.Setting)} size="large" color="inherit">
               <SettingsIcon />
             </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
+            <IconButton size="large" color="inherit">
               <HelpIcon />
             </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              color="inherit"
-            >
+            <IconButton onClick={() => handleModalOpen(ModalType.UpdateProfile)} size="large" edge="end" color="inherit" >
               <AccountCircle />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
-              aria-label="show more"
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
@@ -88,6 +76,9 @@ export default function PrimarySearchAppBar() {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
+      <Modal modalState={modalState} handleModalClose={handleModalClose} />
     </Box>
   )
 }
+
+export default PrimarySearchAppBar
