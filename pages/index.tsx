@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next'
-import { useRouter } from "next/router";
+import Router from "next/router";
 import Head from 'next/head'
-import React, {useState} from 'react'
+import React, { useState, useEffect, use } from 'react'
 import { getCookies, getCookie, setCookie, deleteCookie } from 'cookies-next';
 
 import { IconButton, Box, CssBaseline, Toolbar } from '@mui/material'
@@ -19,16 +19,16 @@ type Props = {
 const Home = ({ window, user }: Props) => {
   
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const router = useRouter()
-
-  if(!user) {
-    router.replace('/login')
-  }
 
   const handleDrawerToggle = () => {
     setMobileMenuOpen(!mobileMenuOpen)
   }
 
+  useEffect(() => {
+    if (!user) {
+      Router.replace('/login')
+    }
+  }, [])
 
 
   return (
