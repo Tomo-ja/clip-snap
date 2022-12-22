@@ -25,9 +25,9 @@ const Home = ({ window, user }: Props) => {
   }
 
   useEffect(() => {
-    if (!user) {
-      Router.replace('/login')
-    }
+    // if (!user) {
+    //   Router.replace('/login')
+    // }
   }, [])
 
 
