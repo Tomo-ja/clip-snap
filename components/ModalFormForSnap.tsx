@@ -1,31 +1,30 @@
 import React from 'react'
-import { Stack, TextField, TextareaAutosize, Typography, Button, IconButton, Box, Dialog, DialogActions, DialogContent, SelectChangeEvent } from '@mui/material'
+import { Stack, TextField, TextareaAutosize, Typography, Button, IconButton, Box, Dialog, DialogActions, DialogContent } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 
 import { InputForTag } from '../components'
 
+import useSnapEditor from '../customHooks/useSnapEditor';
 import { modalSupportInfoProvider } from '../helpers/function'
 import { ModalType } from '../helpers/enums'
 import { Snap } from '../helpers/typesLibrary'
 
 type Props = {
-	snapValues: Snap,
-	handleValueChange: (prop: keyof Snap) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void ,
-	handleEditorState: (modalType?: ModalType) => void,
-	editorState: ModalType | null,
-	snapTags: string[], 
-	handleTagsChange: (event: SelectChangeEvent<string[]>) => void
+	handleModalClose: (modalType?: ModalType) => void,
+	modalState: ModalType | null,
 }
 
-const ModalFormForSnap = ({snapValues, handleValueChange, handleEditorState, editorState, snapTags, handleTagsChange }: Props) => {
+const ModalFormForSnap = ({ modalState, handleModalClose }: Props) => {
 
-	const { buttonText } = modalSupportInfoProvider(editorState)
+	const { buttonText } = modalSupportInfoProvider(modalState)
+	const { snapTags, snapValues, handleTagsChange, handleValueChange } = useSnapEditor({snap: null})
+
 	
 	return(
-		<Dialog maxWidth='md' fullWidth={true} open={editorState ? true : false} scroll='body' onClose={() => handleEditorState()}  >
+		<Dialog maxWidth='md' fullWidth={true} open={modalState === ModalType.CreateSnap ? true : false} scroll='body' onClose={() => handleModalClose()} >
 			<DialogContent >
 				<Typography variant="h5" component="h2" textAlign='center' fontWeight={700} >
-					{editorState}
+					{modalState}
 				</Typography>
 				<Stack spacing={3} my={5} width='100%'>
 					<Box>
@@ -34,7 +33,7 @@ const ModalFormForSnap = ({snapValues, handleValueChange, handleEditorState, edi
 					</Box>
 					<Box>
 						<label htmlFor=''>Tags</label>
-						<InputForTag tags={['React', 'HTML', 'CSS']} handleTagsChange={handleTagsChange}/>
+						<InputForTag tags={['React', 'HTML', 'CSS']} handleTagsChange={handleTagsChange} selectedTags={snapTags} />
 					</Box>
 					<Box>
 						<label htmlFor='snap-title'>Snap Code</label>
@@ -59,7 +58,7 @@ const ModalFormForSnap = ({snapValues, handleValueChange, handleEditorState, edi
 				</Stack>
 				<DialogActions>
 					<Button variant="contained" color='warning'>{buttonText}</Button>
-					<Button onClick={() => handleEditorState()} variant="outlined" color='inherit'>Cancel</Button>
+					<Button onClick={() => handleModalClose()} variant="outlined" color='inherit'>Cancel</Button>
 				</DialogActions>
 			</DialogContent>
 		</Dialog>

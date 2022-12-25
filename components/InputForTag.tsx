@@ -1,33 +1,8 @@
 import * as React from 'react';
 import { Theme, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
+
+import { Box, OutlinedInput, MenuItem, FormControl, Chip } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Chip from '@mui/material/Chip';
-
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: 48 * 4.5 + 8,
-      width: 250,
-    },
-  },
-};
-
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
 
 function getStyles(name: string, personName: readonly string[], theme: Theme) {
   return {
@@ -40,10 +15,11 @@ function getStyles(name: string, personName: readonly string[], theme: Theme) {
 
 type Props = {
 	tags: string[],
+  selectedTags: string[],
 	handleTagsChange: (event: SelectChangeEvent<string[]>) => void
 }
 
-export default function InputForTag({ tags, handleTagsChange }: Props) {
+export default function InputForTag({ tags, selectedTags, handleTagsChange }: Props) {
   const theme = useTheme();
 
   return (
@@ -52,7 +28,7 @@ export default function InputForTag({ tags, handleTagsChange }: Props) {
         <Select
           id="demo-multiple-chip"
           multiple
-          value={tags}
+          value={selectedTags}
           onChange={handleTagsChange}
           input={<OutlinedInput id="select-multiple-chip" />}
           renderValue={(selected) => (
@@ -62,7 +38,7 @@ export default function InputForTag({ tags, handleTagsChange }: Props) {
               ))}
             </Box>
           )}
-          MenuProps={MenuProps}
+          MenuProps={{PaperProps: {style: { maxHeight: (48 * 4.5 + 8), width: 250}}}}
         >
           {tags.map((tag) => (
             <MenuItem
