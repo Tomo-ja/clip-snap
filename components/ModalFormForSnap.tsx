@@ -17,7 +17,7 @@ type Props = {
 const ModalFormForSnap = ({ modalState, handleModalClose }: Props) => {
 
 	const { buttonText } = modalSupportInfoProvider(modalState)
-	const { snapTags, snapValues, handleTagsChange, handleValueChange } = useSnapEditor({snap: null})
+	const { snapTags, snapValues, handleTagsChange, handleValueChange, addReferenceURLField, handleURLChange } = useSnapEditor({snap: null})
 
 	
 	return(
@@ -28,32 +28,29 @@ const ModalFormForSnap = ({ modalState, handleModalClose }: Props) => {
 				</Typography>
 				<Stack spacing={3} my={5} width='100%'>
 					<Box>
-						<label htmlFor='snap-title'>Snap Name</label>
-						<TextField id='snap-title' value={snapValues.title} onChange={handleValueChange('title')} fullWidth variant="outlined" />
+						<label style={{marginBottom: '8px', display: 'inline-block'}}>Snap Name</label>
+						<TextField value={snapValues.title} onChange={handleValueChange('title')} fullWidth variant="outlined" />
 					</Box>
 					<Box>
-						<label htmlFor=''>Tags</label>
+						<label style={{marginBottom: '8px', display: 'inline-block'}}>Tags</label>
 						<InputForTag tags={['React', 'HTML', 'CSS']} handleTagsChange={handleTagsChange} selectedTags={snapTags} />
 					</Box>
 					<Box>
-						<label htmlFor='snap-title'>Snap Code</label>
-						<TextareaAutosize minRows={8} id='snap-title' value={snapValues.code} onChange={handleValueChange('code')} />
+						<label style={{marginBottom: '8px', display: 'inline-block'}}>Snap Code</label>
+						<TextareaAutosize minRows={8} value={snapValues.code} onChange={handleValueChange('code')} />
 					</Box>
 					<Box>
-						<label>References</label>
-						<IconButton>
-							{/* TODO: add function to increase empty string to reference url to display new input field */}
+						<label style={{marginBottom: '8px', display: 'inline-block'}}>References</label>
+						<IconButton onClick={addReferenceURLField}>
 							<AddIcon />
 						</IconButton>
-						{snapValues.referencesUrl.map(url => 
-							// TODO: handlechange don't wark cuz references url is array
-							<TextField key={url} value={url} onChange={handleValueChange('referencesUrl')} fullWidth variant="outlined" />
+						{snapValues.referencesUrl.map((url, index) => 
+							<TextField key={index} value={url} onChange={handleURLChange(index)} fullWidth variant="outlined" sx={{mb: 1}}/>
 						)}
-						<TextField id='snap-title' value={snapValues.title} onChange={() => handleValueChange('title')} fullWidth variant="outlined" />
 					</Box>
 					<Box>
-						<label htmlFor='snap-description'>Description</label>
-						<TextField id='snap-description' multiline rows={5} value={snapValues.description} onChange={handleValueChange('description')} fullWidth variant="outlined" />
+						<label style={{marginBottom: '8px', display: 'inline-block'}}>Description</label>
+						<TextField multiline rows={5} value={snapValues.description} onChange={handleValueChange('description')} fullWidth variant="outlined" />
 					</Box>
 				</Stack>
 				<DialogActions>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 import { appAxios } from "../lib/axios";
 import { modalFormSubmitUrlGenerator } from '../helpers/function'
@@ -26,9 +26,21 @@ const useSnapEditor = ({ snap }: Props) => {
 		setSnapTags(typeof value === 'string' ? value.split(',') : value)
 	}
 
+	const addReferenceURLField = () => {
+		setSnapValues({...snapValues, referencesUrl: [...snapValues.referencesUrl, '']})
+	}
+
+	const handleURLChange = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+		setSnapValues(prev => {
+			const urls = [...prev.referencesUrl]
+			urls[index] = event.target.value
+			return {...prev, referencesUrl: urls}
+		})
+	}
 
 
-	return { snapTags, snapValues, handleValueChange, handleTagsChange }
+
+	return { snapTags, snapValues, handleValueChange, handleTagsChange, addReferenceURLField, handleURLChange }
 }
 
 export default useSnapEditor
