@@ -1,5 +1,8 @@
 import React from 'react'
-import { Stack, TextField, TextareaAutosize, Typography, Button, Box, Dialog, DialogActions, DialogContent } from '@mui/material'
+import { Stack, TextField, TextareaAutosize, Typography, Button, IconButton, Box, Dialog, DialogActions, DialogContent, SelectChangeEvent } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add';
+
+import { InputForTag } from '../components'
 
 import { modalSupportInfoProvider } from '../helpers/function'
 import { ModalType } from '../helpers/enums'
@@ -9,10 +12,12 @@ type Props = {
 	snapValues: Snap,
 	handleValueChange: (prop: keyof Snap) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void ,
 	handleEditorState: (modalType?: ModalType) => void,
-	editorState: ModalType | null
+	editorState: ModalType | null,
+	snapTags: string[], 
+	handleTagsChange: (event: SelectChangeEvent<string[]>) => void
 }
 
-const ModalFormForSnap = ({snapValues, handleValueChange, handleEditorState, editorState }: Props) => {
+const ModalFormForSnap = ({snapValues, handleValueChange, handleEditorState, editorState, snapTags, handleTagsChange }: Props) => {
 
 	const { buttonText } = modalSupportInfoProvider(editorState)
 	
@@ -28,9 +33,8 @@ const ModalFormForSnap = ({snapValues, handleValueChange, handleEditorState, edi
 						<TextField id='snap-title' value={snapValues.title} onChange={handleValueChange('title')} fullWidth variant="outlined" />
 					</Box>
 					<Box>
-						<label htmlFor='snap-title'>Tags</label>
-						{/* // TODO: handlechange don't wark cuz references url is array */}
-						<TextField id='snap-title' value={snapValues.tags} onChange={() => handleValueChange('title')} fullWidth variant="outlined" />
+						<label htmlFor=''>Tags</label>
+						<InputForTag tags={['React', 'HTML', 'CSS']} handleTagsChange={handleTagsChange}/>
 					</Box>
 					<Box>
 						<label htmlFor='snap-title'>Snap Code</label>
@@ -38,6 +42,10 @@ const ModalFormForSnap = ({snapValues, handleValueChange, handleEditorState, edi
 					</Box>
 					<Box>
 						<label>References</label>
+						<IconButton>
+							{/* TODO: add function to increase empty string to reference url to display new input field */}
+							<AddIcon />
+						</IconButton>
 						{snapValues.referencesUrl.map(url => 
 							// TODO: handlechange don't wark cuz references url is array
 							<TextField key={url} value={url} onChange={handleValueChange('referencesUrl')} fullWidth variant="outlined" />

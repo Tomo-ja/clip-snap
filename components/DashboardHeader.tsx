@@ -16,7 +16,7 @@ import { ModalType } from '../helpers/enums';
 const DashboardHeader = () => {
 
   const { modalState, handleModalClose, handleModalOpen } = useModal()
-	const { snapValues, handleValueChange, handleEditorState, editorState } = useSnapEditor({modalType: ModalType.CreateSnap})
+	const { snapValues, handleValueChange, handleEditorState, editorState, snapTags, handleTagsChange } = useSnapEditor({modalType: ModalType.CreateSnap})
 
 	return(
 		<Box sx={ {flexGrow: 1}} bgcolor={'white'} p={3}>
@@ -41,7 +41,7 @@ const DashboardHeader = () => {
 				Short description of the folder will be here
 			</Typography>
       <Modal modalState={modalState} handleModalClose={handleModalClose} />
-			<ModalFormForSnap snapValues={snapValues} handleValueChange={handleValueChange} handleEditorState={handleEditorState} editorState={editorState} />
+			<ModalFormForSnap snapTags={snapTags} handleTagsChange={handleTagsChange} snapValues={snapValues} handleValueChange={handleValueChange} handleEditorState={handleEditorState} editorState={editorState} />
 		</Box>
 	)
 
