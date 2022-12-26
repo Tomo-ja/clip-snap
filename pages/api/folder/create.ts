@@ -14,7 +14,6 @@ export default async function create(req: NextApiRequest, res: NextApiResponse<a
 		}
 
 		const newFolder = await Folder.create(folderInfo)
-		console.log(newFolder)
 
 		res.json({ success: true, message: 'successfully created new folder', folder: newFolder })
 

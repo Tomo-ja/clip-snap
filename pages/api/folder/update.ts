@@ -21,5 +21,4 @@ export default async function update(req: NextApiRequest, res: NextApiResponse<a
 	} catch (error) {
 		res.json({ error })
 	}
-	
 }
